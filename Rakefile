@@ -5,13 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "always_verify_ssl_certificates"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Force net/http to always verify SSL certificates.}
+    gem.description = %Q{Ruby’s net/http is setup to never verify SSL certificates by default. Most ruby libraries do the same. That means that you’re not verifying the identity of the server you’re communicating with and are therefore exposed to man in the middle attacks. This gem monkey-patches net/http to force certificate verification and make turning it off impossible.}
     gem.email = "jamesgolick@gmail.com"
     gem.homepage = "http://github.com/jamesgolick/always_verify_ssl_certificates"
     gem.authors = ["James Golick"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

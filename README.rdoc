@@ -4,6 +4,8 @@ Ruby's net/http is setup to never verify SSL certificates by default. Most ruby 
 
 All you need to do is require this gem, and set a path to your certificate authority bundle or directory:
 
+  $ gem install always_verify_ssl_certificates
+
   require "always_verify_ssl_certificates"
   AlwaysVerifySSLCertificates.ca_file = "/etc/pki/tls/certs/ca-bundle.crt" # the centos location
 
