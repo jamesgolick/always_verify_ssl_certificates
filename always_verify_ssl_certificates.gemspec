@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{always_verify_ssl_certificates}
-  s.version = ""
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James Golick"]
   s.date = %q{2010-12-07}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{Ruby’s net/http is setup to never verify SSL certificates by default. Most ruby libraries do the same. That means that you’re not verifying the identity of the server you’re communicating with and are therefore exposed to man in the middle attacks. This gem monkey-patches net/http to force certificate verification and make turning it off impossible.}
   s.email = %q{jamesgolick@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.rdoc",
      "Rakefile",
+     "VERSION",
+     "always_verify_ssl_certificates.gemspec",
      "lib/always_verify_ssl_certificates.rb",
      "test/helper.rb",
      "test/test_always_verify_ssl_certificates.rb"
@@ -30,7 +32,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Force net/http to always verify SSL certificates.}
   s.test_files = [
     "test/helper.rb",
      "test/test_always_verify_ssl_certificates.rb"
@@ -41,12 +43,9 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
     else
-      s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
     end
   else
-    s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
   end
 end
 
