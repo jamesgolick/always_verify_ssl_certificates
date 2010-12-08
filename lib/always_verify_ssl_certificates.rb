@@ -3,7 +3,29 @@ require "net/https"
 
 class AlwaysVerifySSLCertificates
   class << self
+    KNOWN_CA_FILES = %w{ /etc/pki/tls/certs/ca-bundle.crt }
+    KNOWN_CA_PATHS = %w{ /etc/ssl/certs /System/Library/OpenSSL/certs/ } # Unsure about last directory (OS X)
+
     attr_accessor :ca_file, :ca_path
+
+    def discover_ca_file_or_path
+      KNOWN_CA_FILES.each do |f|
+        if File.exists?(f)
+          self.ca_file = f
+          return f
+        end
+      end
+
+      KNOWN_CA_PATHS.each do |p|
+        if File.directory?(p)
+          self.ca_path = p
+          return p
+        end
+      end
+
+      nil
+    end
+
   end
 end
 
@@ -16,7 +38,7 @@ module Net
         D "opened"
         if use_ssl?
           if !AlwaysVerifySSLCertificates.ca_file && !AlwaysVerifySSLCertificates.ca_path
-            raise "You must set AlwaysVerifySSLCertificates.ca_file or AlwaysVerifySSLCertificates.ca_path to use SSL."
+            raise "You must set AlwaysVerifySSLCertificates.ca_file or AlwaysVerifySSLCertificates.ca_path to use SSL." unless AlwaysVerifySSLCertificates.discover_ca_file_or_path
           end
 
           @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_PEER
