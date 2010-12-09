@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{always_verify_ssl_certificates}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James Golick"]
-  s.date = %q{2010-12-07}
+  s.date = %q{2010-12-09}
   s.description = %q{Ruby’s net/http is setup to never verify SSL certificates by default. Most ruby libraries do the same. That means that you’re not verifying the identity of the server you’re communicating with and are therefore exposed to man in the middle attacks. This gem monkey-patches net/http to force certificate verification and make turning it off impossible.}
   s.email = %q{jamesgolick@gmail.com}
   s.extra_rdoc_files = [
