@@ -1,3 +1,5 @@
+require 'resolv'
+require 'resolv-replace'
 require "net/http"
 require "net/https"
 
