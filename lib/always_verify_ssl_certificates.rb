@@ -9,7 +9,9 @@ module Net
         s = timeout(@open_timeout) { TCPSocket.open(conn_address(), conn_port()) }
         D "opened"
         if use_ssl?
-          self.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          if self.verify_mode != OpenSSL::SSL::VERIFY_PEER
+            self.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          end
           s = OpenSSL::SSL::SSLSocket.new(s, @ssl_context)
           s.sync_close = true
         end
