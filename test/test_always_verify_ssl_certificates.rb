@@ -7,7 +7,6 @@ class TestAlwaysVerifySslCertificates < Test::Unit::TestCase
     https = Net::HTTP.new(uri.host, uri.port)
 
     https.use_ssl = true
-    https.ca_file = AlwaysVerifySSLCertificates::CA_FILE
 
     https.start do
       https.request_get(uri.path) do |result|
