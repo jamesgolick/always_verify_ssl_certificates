@@ -36,8 +36,6 @@ rescue LoadError
   end
 end
 
-task :test => :check_dependencies
-
 task :default => :test
 
 require 'rake/rdoctask'
@@ -48,4 +46,12 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "always_verify_ssl_certificates #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+Rake::TestTask.new(:test) do |test|
+  test.test_files = FileList.new('test/**/test_*.rb') do |list|
+    list.exclude 'test/test_helper.rb'
+  end
+  test.libs << 'test'
+  test.verbose = true
 end
