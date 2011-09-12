@@ -3,6 +3,9 @@ require 'resolv-replace'
 require "net/http"
 require "net/https"
 
+module AlwaysVerifySSLCertificates
+end
+
 module Net
   class HTTP
     private
