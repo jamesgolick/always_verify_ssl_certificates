@@ -9,6 +9,9 @@ module Net
           if self.verify_mode != OpenSSL::SSL::VERIFY_PEER
             self.verify_mode = OpenSSL::SSL::VERIFY_PEER
           end
+          if @ssl_context.ca_file.nil?
+            @ssl_context.ca_file = AlwaysVerifySSLCertificates::CA_FILE
+          end
           s = OpenSSL::SSL::SSLSocket.new(s, @ssl_context)
           s.sync_close = true
         end

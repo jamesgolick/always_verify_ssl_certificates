@@ -15,14 +15,15 @@ module Net
               ssl_parameters[name] = value
             end
           end
-
           @ssl_context = OpenSSL::SSL::SSLContext.new
           @ssl_context.set_params(ssl_parameters)
-
           if @ssl_context.verify_mode != OpenSSL::SSL::VERIFY_PEER
             @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_PEER
           end
-          
+          puts "context ca_file => #{@ssl_context.ca_file}"
+          unless @ssl_context.ca_file
+            @ssl_context.ca_file = AlwaysVerifySSLCertificates::CA_FILE
+          end
           s = OpenSSL::SSL::SSLSocket.new(s, @ssl_context)
           s.sync_close = true
         end
