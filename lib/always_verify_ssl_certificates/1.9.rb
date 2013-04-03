@@ -20,7 +20,6 @@ module Net
           if @ssl_context.verify_mode != OpenSSL::SSL::VERIFY_PEER
             @ssl_context.verify_mode = OpenSSL::SSL::VERIFY_PEER
           end
-          puts "context ca_file => #{@ssl_context.ca_file}"
           unless @ssl_context.ca_file
             @ssl_context.ca_file = AlwaysVerifySSLCertificates::CA_FILE
           end
